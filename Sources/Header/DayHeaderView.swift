@@ -19,8 +19,8 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
 
     private var currentWeekdayIndex = -1
 
-    private var daySymbolsViewHeight: Double = 20
-    private var pagingScrollViewHeight: Double = 40
+    private var daySymbolsViewHeight: Double = 0
+    private var pagingScrollViewHeight: Double = 70
     private var swipeLabelViewHeight: Double = 20
 
     private let daySymbolsView: DaySymbolsView
@@ -32,6 +32,36 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
         let separator = UIView()
         separator.backgroundColor = SystemColors.systemSeparator
         return separator
+    }()
+
+    private lazy var previousWeekButton: UIButton = {
+        let button = UIButton(type: .system)
+        if #available(iOS 13.0, *) {
+            let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .thin, scale: .small)
+            let image = UIImage(systemName: "chevron.left", withConfiguration: config)
+            button.setImage(image, for: .normal)
+        } else {
+            button.imageView?.image = nil
+        }
+
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(previousWeekTapped), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var nextWeekButton: UIButton = {
+        let button = UIButton(type: .system)
+        if #available(iOS 13.0, *) {
+            let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .thin, scale: .small)
+            let image = UIImage(systemName: "chevron.right", withConfiguration: config)
+            button.setImage(image, for: .normal)
+        } else {
+            button.imageView?.image = nil
+        }
+
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(nextWeekTapped), for: .touchUpInside)
+        return button
     }()
 
     public init(calendar: Calendar) {
@@ -50,7 +80,8 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
     }
 
     private func configure() {
-        [daySymbolsView, swipeLabelView, separator].forEach(addSubview)
+        [daySymbolsView, swipeLabelView, separator, previousWeekButton, nextWeekButton].forEach(addSubview)
+        daySymbolsView.isHidden = true
         backgroundColor = style.backgroundColor
         configurePagingViewController()
     }
@@ -104,11 +135,27 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
 
     override public func layoutSubviews() {
         super.layoutSubviews()
+
+        let buttonWidth: CGFloat = 44
+        let buttonHeight: CGFloat = 44
+        let buttonY = daySymbolsViewHeight + (pagingScrollViewHeight - buttonHeight) / 2
+
+        // Previous week button on the left
+        previousWeekButton.frame = CGRect(x: 0, y: buttonY, width: buttonWidth, height: buttonHeight)
+
+        // Next week button on the right
+        nextWeekButton.frame = CGRect(x: bounds.width - buttonWidth, y: buttonY, width: buttonWidth, height: buttonHeight)
+
         daySymbolsView.frame = CGRect(origin: .zero,
                                       size: CGSize(width: bounds.width, height: daySymbolsViewHeight))
-        pagingViewController.view?.frame = CGRect(origin: CGPoint(x: 0, y: daySymbolsViewHeight),
-                                                  size: CGSize(width: bounds.width, height: pagingScrollViewHeight))
-        swipeLabelView.frame = CGRect(origin: CGPoint(x: 0, y: bounds.height - 10 - swipeLabelViewHeight),
+
+        // Adjust paging view to account for buttons
+        let pagingX = buttonWidth
+        let pagingWidth = bounds.width - (buttonWidth * 2)
+        pagingViewController.view?.frame = CGRect(origin: CGPoint(x: pagingX, y: daySymbolsViewHeight),
+                                                  size: CGSize(width: pagingWidth, height: pagingScrollViewHeight))
+
+        swipeLabelView.frame = CGRect(origin: CGPoint(x: 0, y: pagingScrollViewHeight + 8),
                                       size: CGSize(width: bounds.width, height: swipeLabelViewHeight))
 
         let separatorHeight = 1 / UIScreen.main.scale
@@ -198,5 +245,19 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
 
     public func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         (pendingViewControllers as? [DaySelectorController])?.forEach{$0.updateStyle(style.daySelector)}
+    }
+
+    // MARK: Navigation Actions
+
+    @objc private func previousWeekTapped() {
+        guard let currentDate = state?.selectedDate else { return }
+        let previousWeek = calendar.date(byAdding: .weekOfYear, value: -1, to: currentDate)!
+        state?.move(to: previousWeek)
+    }
+
+    @objc private func nextWeekTapped() {
+        guard let currentDate = state?.selectedDate else { return }
+        let nextWeek = calendar.date(byAdding: .weekOfYear, value: 1, to: currentDate)!
+        state?.move(to: nextWeek)
     }
 }

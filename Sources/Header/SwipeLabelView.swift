@@ -61,7 +61,7 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
     private func configure() {
         for _ in 0...1 {
             let label = UILabel()
-            label.textAlignment = .center
+            label.textAlignment = .left
             labels.append(label)
             addSubview(label)
         }
@@ -98,7 +98,8 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
     override public func layoutSubviews() {
         super.layoutSubviews()
         subviews.forEach { subview in
-            subview.frame = bounds
+            subview.frame = bounds.insetBy(dx: 16, dy: 0)
+            subview.frame.origin.x = 16
         }
     }
 
@@ -120,11 +121,18 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
 
     private func formattedDate(date: Date) -> String {
         let timezone = calendar.timeZone
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .medium
+//        formatter.timeStyle = .none
+//        formatter.timeZone = timezone
+//        formatter.locale = Locale.init(identifier: Locale.preferredLanguages[0])
+//        return formatter.string(from: date)
+        
         let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .none
+        formatter.dateFormat = "EEE, MMM d"     // Tue, Mar 2
         formatter.timeZone = timezone
-        formatter.locale = Locale.init(identifier: Locale.preferredLanguages[0])
-        return formatter.string(from: date)
+        formatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
+
+        return formatter.string(from: date).uppercased()
     }
 }

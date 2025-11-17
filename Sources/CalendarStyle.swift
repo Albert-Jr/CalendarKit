@@ -28,27 +28,27 @@ public struct DayHeaderStyle {
 }
 
 public struct DaySelectorStyle {
-    public var activeTextColor = SystemColors.systemBackground
+    public var activeTextColor = UIColor.white
     public var selectedBackgroundColor = SystemColors.label
 
     public var weekendTextColor = SystemColors.secondaryLabel
     public var inactiveTextColor = SystemColors.label
     public var inactiveBackgroundColor = UIColor.clear
 
-    public var todayInactiveTextColor = SystemColors.systemRed
+    public var todayInactiveTextColor = SystemColors.label
     public var todayActiveTextColor = UIColor.white
-    public var todayActiveBackgroundColor = SystemColors.systemRed
-    
-    public var font = UIFont.systemFont(ofSize: 18)
-    public var todayFont = UIFont.boldSystemFont(ofSize: 18)
+    public var todayActiveBackgroundColor = SystemColors.label
+
+    public var font = UIFont.systemFont(ofSize: 16, weight: .regular)
+    public var todayFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
 
     public init() {}
 }
 
 public struct DaySymbolsStyle {
     public var weekendColor = SystemColors.secondaryLabel
-    public var weekDayColor = SystemColors.label
-    public var font = UIFont.systemFont(ofSize: 10)
+    public var weekDayColor = SystemColors.secondaryLabel
+    public var font = UIFont.systemFont(ofSize: 12, weight: .regular)
     public init() {}
 }
 
