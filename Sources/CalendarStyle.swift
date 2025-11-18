@@ -105,6 +105,7 @@ public struct TimelineStyle {
     public var allDayStyle = AllDayViewStyle()
     public var timeIndicator = CurrentTimeIndicatorStyle()
     public var timeColor = SystemColors.secondaryLabel
+    public var timeLabelTextColor = SystemColors.secondaryLabel  // Text color for time labels (10 AM, 11 AM, etc)
     public var separatorColor = SystemColors.systemSeparator
     public var backgroundColor = SystemColors.systemBackground
     public var font = UIFont.boldSystemFont(ofSize: 11)
@@ -125,9 +126,11 @@ public struct TimelineStyle {
 }
 
 public struct CurrentTimeIndicatorStyle {
-    public var color = SystemColors.systemRed
+    public var color = SystemColors.systemRed  // Color for time label
+    public var lineColor = SystemColors.systemRed  // Color for the line and circle
     public var font = UIFont.systemFont(ofSize: 11)
     public var dateStyle : DateStyle = .system
+    public var leadingInset: Double = 53  // Leading inset for current time indicator
     public init() {}
 }
 

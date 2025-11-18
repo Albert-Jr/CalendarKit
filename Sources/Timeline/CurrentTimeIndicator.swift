@@ -2,7 +2,7 @@ import UIKit
 
 @objc public final class CurrentTimeIndicator: UIView {
     private let padding : Double = 3
-    private let leadingInset: Double = 53
+    private var leadingInset: Double = 53
 
     public var calendar: Calendar = Calendar.autoupdatingCurrent {
         didSet {
@@ -33,6 +33,7 @@ import UIKit
     private var line = UIView()
 
     private var style = CurrentTimeIndicatorStyle()
+    private var widthConstraint: NSLayoutConstraint?
 
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -65,7 +66,8 @@ import UIKit
         //The width of the label is determined by leftInset and padding.
         //The y position is determined by the line's middle.
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.widthAnchor.constraint(equalToConstant: leadingInset - (3 * padding)).isActive = true
+        widthConstraint = timeLabel.widthAnchor.constraint(equalToConstant: leadingInset - (3 * padding))
+        widthConstraint?.isActive = true
         timeLabel.trailingAnchor.constraint(equalTo: line.leadingAnchor, constant: -padding).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: line.centerYAnchor).isActive = true
         timeLabel.baselineAdjustment = .alignCenters
@@ -137,10 +139,14 @@ import UIKit
 
     func updateStyle(_ newStyle: CurrentTimeIndicatorStyle) {
         style = newStyle
+        leadingInset = style.leadingInset
         timeLabel.textColor = style.color
         timeLabel.font = style.font
-        circle.backgroundColor = style.color
-        line.backgroundColor = style.color
+        circle.backgroundColor = style.lineColor
+        line.backgroundColor = style.lineColor
+
+        // Update width constraint
+        widthConstraint?.constant = leadingInset - (3 * padding)
 
         switch style.dateStyle {
         case .twelveHour:
@@ -153,6 +159,8 @@ import UIKit
             is24hClock = Locale.autoupdatingCurrent.uses24hClock
             break
         }
+
+        setNeedsLayout()
     }
 
     public override func willMove(toSuperview newSuperview: UIView?) {

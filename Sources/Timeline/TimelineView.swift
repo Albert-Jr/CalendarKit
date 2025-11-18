@@ -279,7 +279,7 @@ public final class TimelineView: UIView {
         let paragraphStyle = mutableParagraphStyle.copy() as! NSParagraphStyle
 
         let attributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                          NSAttributedString.Key.foregroundColor: self.style.timeColor,
+                          NSAttributedString.Key.foregroundColor: self.style.timeLabelTextColor,
                           NSAttributedString.Key.font: style.font] as [NSAttributedString.Key : Any]
 
         let scale = UIScreen.main.scale

@@ -128,6 +128,9 @@ final class CustomCalendarExampleController: DayViewController {
         style.timeline.timeColumnWidth = 53   // Width for time labels (e.g., "9 AM")
         style.timeline.leadingInset = 53     // Total left space (time column + spacing before events)
         style.timeline.trailingInset = 0     // Right margin for timeline
+        style.timeline.timeLabelTextColor = .red  // Text color for time labels (10 AM, 11 AM, etc)
+        style.timeline.timeIndicator.leadingInset = 65  // Leading inset for current time indicator
+        style.timeline.timeIndicator.lineColor = .blue  // Color for current time indicator line and circle
 
         // Event borders
         style.timeline.eventBorderWidth = 2   // White border for events
