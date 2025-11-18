@@ -106,6 +106,7 @@ public struct TimelineStyle {
     public var timeIndicator = CurrentTimeIndicatorStyle()
     public var timeColor = SystemColors.secondaryLabel
     public var timeLabelTextColor = SystemColors.secondaryLabel  // Text color for time labels (10 AM, 11 AM, etc)
+    public var timeLabelFont = UIFont.boldSystemFont(ofSize: 11)  // Font for time labels (10 AM, 11 AM, etc)
     public var separatorColor = SystemColors.systemSeparator
     public var backgroundColor = SystemColors.systemBackground
     public var font = UIFont.boldSystemFont(ofSize: 11)

@@ -280,7 +280,7 @@ public final class TimelineView: UIView {
 
         let attributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle,
                           NSAttributedString.Key.foregroundColor: self.style.timeLabelTextColor,
-                          NSAttributedString.Key.font: style.font] as [NSAttributedString.Key : Any]
+                          NSAttributedString.Key.font: style.timeLabelFont] as [NSAttributedString.Key : Any]
 
         let scale = UIScreen.main.scale
         let hourLineHeight = 1 / UIScreen.main.scale
@@ -326,7 +326,7 @@ public final class TimelineView: UIView {
 
             if hour == hourToRemoveIndex { continue }
 
-            let fontSize = style.font.pointSize
+            let fontSize = style.timeLabelFont.pointSize
             let timeRect: CGRect = {
                 var x: Double
                 if rightToLeft {

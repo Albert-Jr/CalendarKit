@@ -127,9 +127,11 @@ final class CustomCalendarExampleController: DayViewController {
         style.timeline.timeColumnOffset = 0  // Align time labels with "TUE, NOV 18" header (same as swipe label leading)
         style.timeline.timeColumnWidth = 53   // Width for time labels (e.g., "9 AM")
         style.timeline.leadingInset = 53     // Total left space (time column + spacing before events)
-        style.timeline.trailingInset = 0     // Right margin for timeline
-        style.timeline.timeLabelTextColor = .red  // Text color for time labels (10 AM, 11 AM, etc)
+        style.timeline.trailingInset = 16     // Right margin for timeline
+        style.timeline.timeLabelTextColor = .black  // Text color for time labels (10 AM, 11 AM, etc)
+        style.timeline.timeLabelFont = UIFont.systemFont(ofSize: 11, weight: .regular)  // Font for time labels (10 AM, 11 AM, etc)
         style.timeline.timeIndicator.leadingInset = 65  // Leading inset for current time indicator
+        style.timeline.timeIndicator.color = .green  // Color for current time label text
         style.timeline.timeIndicator.lineColor = .blue  // Color for current time indicator line and circle
 
         // Event borders
