@@ -127,6 +127,9 @@ public class DayView: UIView, TimelinePagerViewDelegate {
     
     public func updateStyle(_ newStyle: CalendarStyle) {
         style = newStyle
+        backgroundColor = style.backgroundColor
+        layer.cornerRadius = style.cornerRadius
+        clipsToBounds = style.cornerRadius > 0
         dayHeaderView.updateStyle(style.header)
         timelinePagerView.updateStyle(style.timeline)
     }

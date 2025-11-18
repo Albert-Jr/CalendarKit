@@ -15,6 +15,8 @@ public enum DateStyle {
 public struct CalendarStyle {
     public var header = DayHeaderStyle()
     public var timeline = TimelineStyle()
+    public var backgroundColor = SystemColors.systemBackground  // Background color for the whole calendar
+    public var cornerRadius: CGFloat = 0  // Corner radius for the whole calendar
     public init() {}
 }
 

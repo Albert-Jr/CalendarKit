@@ -56,7 +56,21 @@ final class CustomCalendarExampleController: DayViewController {
         calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
 
         dayView = DayView(calendar: calendar)
-        view = dayView
+
+        // Create a container view and add dayView with spacing
+        let containerView = UIView()
+      containerView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        view = containerView
+
+        containerView.addSubview(dayView)
+        dayView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            dayView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor),
+            dayView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            dayView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            dayView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
     }
 
     override func viewDidLoad() {
@@ -67,6 +81,12 @@ final class CustomCalendarExampleController: DayViewController {
 
         // Example: Customize fonts and colors
         var style = CalendarStyle()
+
+        // Whole calendar background color
+        style.backgroundColor = .white
+        style.header.backgroundColor = .white  // Header background
+        style.timeline.backgroundColor = .white  // Timeline background
+        style.cornerRadius = 24  // Corner radius for the whole calendar
 
         // Fonts
         style.header.daySelector.dayNameFont = UIFont.systemFont(ofSize: 12, weight: .regular) // Mon-Sun font
@@ -98,8 +118,8 @@ final class CustomCalendarExampleController: DayViewController {
             style.header.nextWeekIcon = UIImage(systemName: "chevron.right")
         }
         style.header.navigationButtonColor = .green
-        style.header.navigationButtonLeadingSpacing = 24  // Leading spacing for left button
-        style.header.navigationButtonTrailingSpacing = 24 // Trailing spacing for right button
+        style.header.navigationButtonLeadingSpacing = 0  // Leading spacing for left button
+        style.header.navigationButtonTrailingSpacing = 0 // Trailing spacing for right button
 
         // Timeline (calendar view below) leading and trailing spacing
         style.timeline.timeColumnOffset = 15  // Align time labels with "TUE, NOV 18" header (same as swipe label leading)
