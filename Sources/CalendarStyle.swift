@@ -115,6 +115,8 @@ public struct TimelineStyle {
     public var timeColumnWidth: Double = 53  // Width of time labels column
     public var timeColumnOffset: Double = 2  // Left offset for time labels
     public var eventGap: Double = 0
+    public var eventBorderWidth: CGFloat = 0  // Border width for events
+    public var eventBorderColor: UIColor = .white  // Border color for events
     public init() {}
 }
 
@@ -129,5 +131,7 @@ public struct AllDayViewStyle {
     public var backgroundColor: UIColor = SystemColors.systemGray4
     public var allDayFont = UIFont.systemFont(ofSize: 12.0)
     public var allDayColor: UIColor = SystemColors.label
+    public var eventBorderWidth: CGFloat = 0  // Border width for all-day events
+    public var eventBorderColor: UIColor = .white  // Border color for all-day events
     public init() {}
 }

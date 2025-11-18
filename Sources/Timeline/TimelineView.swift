@@ -410,7 +410,7 @@ public final class TimelineView: UIView {
                                      y: attributes.frame.minY,
                                      width: attributes.frame.width - style.eventGap,
                                      height: attributes.frame.height - style.eventGap)
-            eventView.updateWithDescriptor(event: descriptor)
+            eventView.updateWithDescriptor(event: descriptor, borderWidth: style.eventBorderWidth, borderColor: style.eventBorderColor)
         }
     }
 

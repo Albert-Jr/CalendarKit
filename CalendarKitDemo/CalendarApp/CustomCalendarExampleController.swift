@@ -89,7 +89,7 @@ final class CustomCalendarExampleController: DayViewController {
         style.header.daySelector.capsuleBackgroundColor = .yellow //UIColor(red: 0xD9/255.0, green: 0xE7/255.0, blue: 0xDE/255.0, alpha: 1.0)
 
         // Label color for "SUN, NOV 16" label
-        style.header.swipeLabel.textColor = .black
+        style.header.swipeLabel.textColor = .purple
         style.header.swipeLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
 
         // Navigation button icons (chevron left/right)
@@ -105,7 +105,13 @@ final class CustomCalendarExampleController: DayViewController {
         style.timeline.timeColumnOffset = 15  // Align time labels with "TUE, NOV 18" header (same as swipe label leading)
         style.timeline.timeColumnWidth = 53   // Width for time labels (e.g., "9 AM")
         style.timeline.leadingInset = 65     // Total left space (time column + spacing before events)
-        style.timeline.trailingInset = 12     // Right margin for timeline
+        style.timeline.trailingInset = 36     // Right margin for timeline
+
+        // Event borders
+        style.timeline.eventBorderWidth = 2   // White border for events
+        style.timeline.eventBorderColor = .purple
+        style.timeline.allDayStyle.eventBorderWidth = 2  // White border for all-day events
+        style.timeline.allDayStyle.eventBorderColor = .white
 
         dayView.updateStyle(style)
 

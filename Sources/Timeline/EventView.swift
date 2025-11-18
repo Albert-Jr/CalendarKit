@@ -42,7 +42,7 @@ open class EventView: UIView {
         }
     }
     
-    public func updateWithDescriptor(event: EventDescriptor) {
+    public func updateWithDescriptor(event: EventDescriptor, borderWidth: CGFloat = 0, borderColor: UIColor = .white) {
         if let attributedText = event.attributedText {
             textView.attributedText = attributedText
             textView.setNeedsLayout()
@@ -58,6 +58,8 @@ open class EventView: UIView {
         backgroundColor = .clear
         layer.backgroundColor = event.backgroundColor.cgColor
         layer.cornerRadius = 5
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor.cgColor
         color = event.color
         eventResizeHandles.forEach{
             $0.borderColor = event.color
