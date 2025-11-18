@@ -87,6 +87,7 @@ final class CustomCalendarExampleController: DayViewController {
         style.header.backgroundColor = .white  // Header background
         style.timeline.backgroundColor = .white  // Timeline background
         style.cornerRadius = 24  // Corner radius for the whole calendar
+        style.header.topSpacing = 16  // Top spacing for header
 
         // Fonts
         style.header.daySelector.dayNameFont = UIFont.systemFont(ofSize: 12, weight: .regular) // Mon-Sun font
@@ -111,6 +112,7 @@ final class CustomCalendarExampleController: DayViewController {
         // Label color for "SUN, NOV 16" label
         style.header.swipeLabel.textColor = .purple
         style.header.swipeLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        style.header.swipeLabel.leadingSpacing = 0  // Leading spacing for swipe label
 
         // Navigation button icons (chevron left/right)
         if #available(iOS 13.0, *) {
@@ -122,10 +124,10 @@ final class CustomCalendarExampleController: DayViewController {
         style.header.navigationButtonTrailingSpacing = 0 // Trailing spacing for right button
 
         // Timeline (calendar view below) leading and trailing spacing
-        style.timeline.timeColumnOffset = 15  // Align time labels with "TUE, NOV 18" header (same as swipe label leading)
+        style.timeline.timeColumnOffset = 0  // Align time labels with "TUE, NOV 18" header (same as swipe label leading)
         style.timeline.timeColumnWidth = 53   // Width for time labels (e.g., "9 AM")
-        style.timeline.leadingInset = 65     // Total left space (time column + spacing before events)
-        style.timeline.trailingInset = 36     // Right margin for timeline
+        style.timeline.leadingInset = 53     // Total left space (time column + spacing before events)
+        style.timeline.trailingInset = 0     // Right margin for timeline
 
         // Event borders
         style.timeline.eventBorderWidth = 2   // White border for events

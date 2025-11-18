@@ -74,6 +74,7 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
             label.textColor = style.textColor
             label.font = style.font
         }
+        setNeedsLayout()
     }
 
     private func animate(_ direction: AnimationDirection) {
@@ -98,8 +99,8 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
     override public func layoutSubviews() {
         super.layoutSubviews()
         subviews.forEach { subview in
-            subview.frame = bounds.insetBy(dx: 32, dy: 0)
-            subview.frame.origin.x = 32
+            subview.frame = bounds.insetBy(dx: style.leadingSpacing, dy: 0)
+            subview.frame.origin.x = style.leadingSpacing
         }
     }
 

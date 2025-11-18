@@ -134,7 +134,8 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
 
         let buttonWidth: CGFloat = 32
         let buttonHeight: CGFloat = 32
-        let buttonY = daySymbolsViewHeight + (pagingScrollViewHeight - buttonHeight) / 2
+        let topSpacing = style.topSpacing
+        let buttonY = topSpacing + daySymbolsViewHeight + (pagingScrollViewHeight - buttonHeight) / 2
         let leadingSpacing: CGFloat = style.navigationButtonLeadingSpacing
         let trailingSpacing: CGFloat = style.navigationButtonTrailingSpacing
 
@@ -144,16 +145,16 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
         // Next week button on the right with 32 trailing spacing
         nextWeekButton.frame = CGRect(x: bounds.width - buttonWidth - trailingSpacing, y: buttonY, width: buttonWidth, height: buttonHeight)
 
-        daySymbolsView.frame = CGRect(origin: .zero,
+        daySymbolsView.frame = CGRect(origin: CGPoint(x: 0, y: topSpacing),
                                       size: CGSize(width: bounds.width, height: daySymbolsViewHeight))
 
         // Adjust paging view to fit between buttons with 0 spacing
         let pagingX = leadingSpacing + buttonWidth
         let pagingWidth = bounds.width - (leadingSpacing + buttonWidth) - (buttonWidth + trailingSpacing)
-        pagingViewController.view?.frame = CGRect(origin: CGPoint(x: pagingX, y: daySymbolsViewHeight),
+        pagingViewController.view?.frame = CGRect(origin: CGPoint(x: pagingX, y: topSpacing + daySymbolsViewHeight),
                                                   size: CGSize(width: pagingWidth, height: pagingScrollViewHeight))
 
-        swipeLabelView.frame = CGRect(origin: CGPoint(x: 0, y: pagingScrollViewHeight + 8),
+        swipeLabelView.frame = CGRect(origin: CGPoint(x: 0, y: topSpacing + pagingScrollViewHeight + 8),
                                       size: CGSize(width: bounds.width, height: swipeLabelViewHeight))
 
         let separatorHeight = 1 / UIScreen.main.scale

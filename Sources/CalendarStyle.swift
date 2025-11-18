@@ -26,6 +26,7 @@ public struct DayHeaderStyle {
     public var swipeLabel = SwipeLabelStyle()
     public var backgroundColor = SystemColors.systemBackground
     public var separatorColor = SystemColors.systemSeparator
+    public var topSpacing: CGFloat = 0
 
     // Navigation button icons
     public var previousWeekIcon: UIImage? = {
@@ -96,6 +97,7 @@ public struct SwipeLabelStyle {
     // Color for "SUN, NOV 16" label
     public var textColor = SystemColors.label
     public var font = UIFont.systemFont(ofSize: 15)
+    public var leadingSpacing: CGFloat = 0
     public init() {}
 }
 
