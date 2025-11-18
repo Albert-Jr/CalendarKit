@@ -36,30 +36,20 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
 
     private lazy var previousWeekButton: UIButton = {
         let button = UIButton(type: .system)
-        if #available(iOS 13.0, *) {
-            let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .thin, scale: .small)
-            let image = UIImage(systemName: "chevron.left", withConfiguration: config)
-            button.setImage(image, for: .normal)
-        } else {
-            button.imageView?.image = nil
-        }
-
-        button.tintColor = .black
+        button.setImage(style.previousWeekIcon, for: .normal)
+        button.tintColor = style.navigationButtonColor
+        button.contentMode = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(previousWeekTapped), for: .touchUpInside)
         return button
     }()
 
     private lazy var nextWeekButton: UIButton = {
         let button = UIButton(type: .system)
-        if #available(iOS 13.0, *) {
-            let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .thin, scale: .small)
-            let image = UIImage(systemName: "chevron.right", withConfiguration: config)
-            button.setImage(image, for: .normal)
-        } else {
-            button.imageView?.image = nil
-        }
-
-        button.tintColor = .black
+        button.setImage(style.nextWeekIcon, for: .normal)
+        button.tintColor = style.navigationButtonColor
+        button.contentMode = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(nextWeekTapped), for: .touchUpInside)
         return button
     }()
@@ -131,6 +121,12 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
         (pagingViewController.viewControllers as? [DaySelectorController])?.forEach{$0.updateStyle(newStyle.daySelector)}
         backgroundColor = style.backgroundColor
         separator.backgroundColor = style.separatorColor
+
+        // Update navigation button icons and color
+        previousWeekButton.setImage(style.previousWeekIcon, for: .normal)
+        nextWeekButton.setImage(style.nextWeekIcon, for: .normal)
+        previousWeekButton.tintColor = style.navigationButtonColor
+        nextWeekButton.tintColor = style.navigationButtonColor
     }
 
     override public func layoutSubviews() {
@@ -139,8 +135,8 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
         let buttonWidth: CGFloat = 32
         let buttonHeight: CGFloat = 32
         let buttonY = daySymbolsViewHeight + (pagingScrollViewHeight - buttonHeight) / 2
-        let leadingSpacing: CGFloat = 24
-        let trailingSpacing: CGFloat = 24
+        let leadingSpacing: CGFloat = style.navigationButtonLeadingSpacing
+        let trailingSpacing: CGFloat = style.navigationButtonTrailingSpacing
 
         // Previous week button on the left with 32 leading spacing
         previousWeekButton.frame = CGRect(x: leadingSpacing, y: buttonY, width: buttonWidth, height: buttonHeight)

@@ -91,7 +91,7 @@ public final class TimelineView: UIView {
     }
 
     public var calendarWidth: Double {
-        bounds.width - style.leadingInset
+        bounds.width - style.leadingInset - style.trailingInset
     }
     
     public private(set) var is24hClock = true {
@@ -330,14 +330,14 @@ public final class TimelineView: UIView {
             let timeRect: CGRect = {
                 var x: Double
                 if rightToLeft {
-                    x = bounds.width - 53
+                    x = bounds.width - style.timeColumnWidth - style.timeColumnOffset
                 } else {
-                    x = 2
+                    x = style.timeColumnOffset
                 }
 
                 return CGRect(x: x,
                               y: hourFloat * style.verticalDiff + style.verticalInset - 7,
-                              width: style.leadingInset - 8,
+                              width: style.timeColumnWidth - 8,
                               height: fontSize + 2)
             }()
 
@@ -352,13 +352,13 @@ public final class TimelineView: UIView {
 
                 var x: Double
                 if UIView.userInterfaceLayoutDirection(for: semanticContentAttribute) == .rightToLeft {
-                    x = bounds.width - (style.leadingInset + 7)
+                    x = bounds.width - style.timeColumnWidth - style.timeColumnOffset
                 } else {
-                    x = 2
+                    x = style.timeColumnOffset
                 }
 
                 let timeRect = CGRect(x: x, y: hourFloat * style.verticalDiff + style.verticalInset - 7     + style.verticalDiff * (Double(accentedMinute) / 60),
-                                      width: style.leadingInset - 8, height: fontSize + 2)
+                                      width: style.timeColumnWidth - 8, height: fontSize + 2)
 
                 let timeString = NSString(string: ":\(accentedMinute)")
 

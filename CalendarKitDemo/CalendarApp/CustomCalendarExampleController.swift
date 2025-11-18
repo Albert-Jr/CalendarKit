@@ -92,6 +92,21 @@ final class CustomCalendarExampleController: DayViewController {
         style.header.swipeLabel.textColor = .black
         style.header.swipeLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
 
+        // Navigation button icons (chevron left/right)
+        if #available(iOS 13.0, *) {
+            style.header.previousWeekIcon = UIImage(systemName: "chevron.left")
+            style.header.nextWeekIcon = UIImage(systemName: "chevron.right")
+        }
+        style.header.navigationButtonColor = .green
+        style.header.navigationButtonLeadingSpacing = 24  // Leading spacing for left button
+        style.header.navigationButtonTrailingSpacing = 24 // Trailing spacing for right button
+
+        // Timeline (calendar view below) leading and trailing spacing
+        style.timeline.timeColumnOffset = 15  // Align time labels with "TUE, NOV 18" header (same as swipe label leading)
+        style.timeline.timeColumnWidth = 53   // Width for time labels (e.g., "9 AM")
+        style.timeline.leadingInset = 65     // Total left space (time column + spacing before events)
+        style.timeline.trailingInset = 12     // Right margin for timeline
+
         dayView.updateStyle(style)
 
         reloadData()

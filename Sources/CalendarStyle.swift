@@ -24,6 +24,28 @@ public struct DayHeaderStyle {
     public var swipeLabel = SwipeLabelStyle()
     public var backgroundColor = SystemColors.systemBackground
     public var separatorColor = SystemColors.systemSeparator
+
+    // Navigation button icons
+    public var previousWeekIcon: UIImage? = {
+        if #available(iOS 13.0, *) {
+            let config = UIImage.SymbolConfiguration(pointSize: 12, weight: .thin, scale: .small)
+            return UIImage(systemName: "arrow.left", withConfiguration: config)
+        } else {
+            return nil
+        }
+    }()
+    public var nextWeekIcon: UIImage? = {
+        if #available(iOS 13.0, *) {
+            let config = UIImage.SymbolConfiguration(pointSize: 12, weight: .thin, scale: .small)
+            return UIImage(systemName: "arrow.right", withConfiguration: config)
+        } else {
+            return nil
+        }
+    }()
+    public var navigationButtonColor = UIColor.black
+    public var navigationButtonLeadingSpacing: CGFloat = 24
+    public var navigationButtonTrailingSpacing: CGFloat = 24
+
     public init() {}
 }
 
@@ -88,7 +110,10 @@ public struct TimelineStyle {
     public var splitMinuteInterval: Int = 15
     public var verticalDiff: Double = 50
     public var verticalInset: Double = 10
-    public var leadingInset: Double = 53
+    public var leadingInset: Double = 53  // Total left space (time labels + spacing)
+    public var trailingInset: Double = 0
+    public var timeColumnWidth: Double = 53  // Width of time labels column
+    public var timeColumnOffset: Double = 2  // Left offset for time labels
     public var eventGap: Double = 0
     public init() {}
 }
