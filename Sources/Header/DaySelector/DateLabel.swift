@@ -161,7 +161,7 @@ public final class DayColumnCell: UIView, DaySelectorItemProtocol {
         let daySymbols = calendar.shortStandaloneWeekdaySymbols
         let weekday = calendar.component(.weekday, from: date)
         dayLabel.text = daySymbols[weekday - 1]
-        dayLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        dayLabel.font = style.dayNameFont
 
         // Update date label
         let day = calendar.component(.day, from: date)
@@ -172,19 +172,20 @@ public final class DayColumnCell: UIView, DaySelectorItemProtocol {
 
         if selected {
             dateLabel.font = style.todayFont
-            dayBackgroundView.backgroundColor = .white
+            dayBackgroundView.backgroundColor = style.dateCircleBackgroundSelectedColor
 
-            backgroundColor = UIColor(red: 0xD9/255.0, green: 0xE7/255.0, blue: 0xDE/255.0, alpha: 1.0)
-            dayLabel.textColor = .black
-            dateLabel.textColor = .black
+            backgroundColor = style.capsuleBackgroundColor
+            dayLabel.textColor = style.dayNameSelectedColor
+            dayLabel.font = UIFont.boldSystemFont(ofSize: style.dayNameFont.pointSize)
+            dateLabel.textColor = style.dateNumberSelectedColor
         } else {
             dateLabel.font = style.font
-            dayBackgroundView.backgroundColor = .white
+            dayBackgroundView.backgroundColor = style.dateCircleBackgroundUnselectedColor
 
             backgroundColor = .clear
-            dayLabel.textColor = .gray
-            let textColor = isWeekend ? style.weekendTextColor : style.inactiveTextColor
-            dateLabel.textColor = isToday ? style.todayInactiveTextColor : textColor
+            dayLabel.textColor = style.dayNameUnselectedColor
+            dayLabel.font = style.dayNameFont
+            dateLabel.textColor = style.dateNumberUnselectedColor
         }
     }
 

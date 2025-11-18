@@ -136,22 +136,24 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
     override public func layoutSubviews() {
         super.layoutSubviews()
 
-        let buttonWidth: CGFloat = 44
-        let buttonHeight: CGFloat = 44
+        let buttonWidth: CGFloat = 32
+        let buttonHeight: CGFloat = 32
         let buttonY = daySymbolsViewHeight + (pagingScrollViewHeight - buttonHeight) / 2
+        let leadingSpacing: CGFloat = 24
+        let trailingSpacing: CGFloat = 24
 
-        // Previous week button on the left
-        previousWeekButton.frame = CGRect(x: 0, y: buttonY, width: buttonWidth, height: buttonHeight)
+        // Previous week button on the left with 32 leading spacing
+        previousWeekButton.frame = CGRect(x: leadingSpacing, y: buttonY, width: buttonWidth, height: buttonHeight)
 
-        // Next week button on the right
-        nextWeekButton.frame = CGRect(x: bounds.width - buttonWidth, y: buttonY, width: buttonWidth, height: buttonHeight)
+        // Next week button on the right with 32 trailing spacing
+        nextWeekButton.frame = CGRect(x: bounds.width - buttonWidth - trailingSpacing, y: buttonY, width: buttonWidth, height: buttonHeight)
 
         daySymbolsView.frame = CGRect(origin: .zero,
                                       size: CGSize(width: bounds.width, height: daySymbolsViewHeight))
 
-        // Adjust paging view to account for buttons
-        let pagingX = buttonWidth
-        let pagingWidth = bounds.width - (buttonWidth * 2)
+        // Adjust paging view to fit between buttons with 0 spacing
+        let pagingX = leadingSpacing + buttonWidth
+        let pagingWidth = bounds.width - (leadingSpacing + buttonWidth) - (buttonWidth + trailingSpacing)
         pagingViewController.view?.frame = CGRect(origin: CGPoint(x: pagingX, y: daySymbolsViewHeight),
                                                   size: CGSize(width: pagingWidth, height: pagingScrollViewHeight))
 

@@ -98,8 +98,8 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
     override public func layoutSubviews() {
         super.layoutSubviews()
         subviews.forEach { subview in
-            subview.frame = bounds.insetBy(dx: 16, dy: 0)
-            subview.frame.origin.x = 16
+            subview.frame = bounds.insetBy(dx: 32, dy: 0)
+            subview.frame.origin.x = 32
         }
     }
 

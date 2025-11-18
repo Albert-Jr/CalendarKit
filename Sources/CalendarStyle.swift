@@ -41,6 +41,22 @@ public struct DaySelectorStyle {
 
     public var font = UIFont.systemFont(ofSize: 16, weight: .regular)
     public var todayFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
+    public var dayNameFont = UIFont.systemFont(ofSize: 12, weight: .regular)
+
+    // Day name colors (Mon-Sun)
+    public var dayNameSelectedColor = UIColor.black
+    public var dayNameUnselectedColor = UIColor.gray
+
+    // Date number colors (1-31)
+    public var dateNumberSelectedColor = UIColor.black
+    public var dateNumberUnselectedColor = SystemColors.label
+
+    // Circle background color for date numbers
+    public var dateCircleBackgroundSelectedColor = UIColor.white
+    public var dateCircleBackgroundUnselectedColor = UIColor.white
+
+    // Capsule background color (whole cell background)
+    public var capsuleBackgroundColor = UIColor(red: 0xD9/255.0, green: 0xE7/255.0, blue: 0xDE/255.0, alpha: 1.0)
 
     public init() {}
 }
@@ -53,6 +69,7 @@ public struct DaySymbolsStyle {
 }
 
 public struct SwipeLabelStyle {
+    // Color for "SUN, NOV 16" label
     public var textColor = SystemColors.label
     public var font = UIFont.systemFont(ofSize: 15)
     public init() {}

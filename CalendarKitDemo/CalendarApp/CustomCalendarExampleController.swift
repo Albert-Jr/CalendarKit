@@ -64,6 +64,36 @@ final class CustomCalendarExampleController: DayViewController {
         title = "CalendarKit Demo"
         navigationController?.navigationBar.isTranslucent = false
         dayView.autoScrollToFirstEvent = true
+
+        // Example: Customize fonts and colors
+        var style = CalendarStyle()
+
+        // Fonts
+        style.header.daySelector.dayNameFont = UIFont.systemFont(ofSize: 12, weight: .regular) // Mon-Sun font
+        style.header.daySelector.font = UIFont.systemFont(ofSize: 12, weight: .regular) // Date numbers (1-31)
+        style.header.daySelector.todayFont = UIFont.systemFont(ofSize: 12, weight: .semibold) // Today's date
+
+        // Sun - Sat label colors
+        style.header.daySelector.dayNameSelectedColor = .black // Selected day name color
+        style.header.daySelector.dayNameUnselectedColor = .gray // Unselected day name color
+
+        // 1 - 31 label colors
+        style.header.daySelector.dateNumberSelectedColor = .white // Selected date number color
+        style.header.daySelector.dateNumberUnselectedColor = .black // Unselected date number color
+
+        // Background color for the circle around 1 - 31 label
+        style.header.daySelector.dateCircleBackgroundSelectedColor = .orange // Selected state
+        style.header.daySelector.dateCircleBackgroundUnselectedColor = .green // Unselected state
+
+        // The whole background of the capsule (Sun - Sat label and 1 - 31 label)
+        style.header.daySelector.capsuleBackgroundColor = .yellow //UIColor(red: 0xD9/255.0, green: 0xE7/255.0, blue: 0xDE/255.0, alpha: 1.0)
+
+        // Label color for "SUN, NOV 16" label
+        style.header.swipeLabel.textColor = .black
+        style.header.swipeLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+
+        dayView.updateStyle(style)
+
         reloadData()
     }
 
