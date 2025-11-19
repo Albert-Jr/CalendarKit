@@ -492,15 +492,27 @@ public final class TimelineView: UIView {
                 if style.eventsWillOverlap && totalCount > 1 {
                     let fixedWidth = style.overlappingEventFixedWidth
 
-                    if index < totalCount - 1 {
-                        // First N-1 events have fixed width
-                        let x = style.leadingInset + Double(index) * fixedWidth
-                        event.frame = CGRect(x: x, y: startY, width: fixedWidth, height: endY - startY)
+                    // Check if total fixed width would exceed calendar width
+                    let totalFixedWidth = Double(totalCount - 1) * fixedWidth
+
+                    if totalFixedWidth >= calendarWidth {
+                        // Fall back to equal width distribution if fixed width would overflow
+                        let floatIndex = Double(index)
+                        let totalCountDouble = Double(totalCount)
+                        let x = style.leadingInset + floatIndex / totalCountDouble * calendarWidth
+                        let equalWidth = calendarWidth / totalCountDouble
+                        event.frame = CGRect(x: x, y: startY, width: equalWidth, height: endY - startY)
                     } else {
-                        // Last event takes the remaining space
-                        let x = style.leadingInset + Double(index) * fixedWidth
-                        let remainingWidth = calendarWidth - Double(index) * fixedWidth
-                        event.frame = CGRect(x: x, y: startY, width: remainingWidth, height: endY - startY)
+                        if index < totalCount - 1 {
+                            // First N-1 events have fixed width
+                            let x = style.leadingInset + Double(index) * fixedWidth
+                            event.frame = CGRect(x: x, y: startY, width: fixedWidth, height: endY - startY)
+                        } else {
+                            // Last event takes the remaining space
+                            let x = style.leadingInset + Double(index) * fixedWidth
+                            let remainingWidth = calendarWidth - Double(index) * fixedWidth
+                            event.frame = CGRect(x: x, y: startY, width: remainingWidth, height: endY - startY)
+                        }
                     }
                 } else {
                     // Original behavior: equal width for all events
