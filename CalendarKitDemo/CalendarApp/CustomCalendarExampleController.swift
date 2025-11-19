@@ -133,6 +133,9 @@ final class CustomCalendarExampleController: DayViewController {
         style.timeline.timeIndicator.leadingInset = 65  // Leading inset for current time indicator
         style.timeline.timeIndicator.color = .green  // Color for current time label text
         style.timeline.timeIndicator.lineColor = .blue  // Color for current time indicator line and circle
+        style.timeline.eventsWillOverlap = true  // Enable overlapping for events with same start time
+        style.timeline.eventGap = 0  // Gap between events (0 for full overlap)
+        style.timeline.overlappingEventFixedWidth = 50  // Fixed width for first N-1 overlapping events (last event takes remaining space)
 
         // Event borders
         style.timeline.eventBorderWidth = 2   // White border for events

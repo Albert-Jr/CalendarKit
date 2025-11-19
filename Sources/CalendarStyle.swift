@@ -123,6 +123,7 @@ public struct TimelineStyle {
     public var eventGap: Double = 0
     public var eventBorderWidth: CGFloat = 0  // Border width for events
     public var eventBorderColor: UIColor = .white  // Border color for events
+    public var overlappingEventFixedWidth: Double = 50  // Fixed width for first N-1 overlapping events
     public init() {}
 }
 
