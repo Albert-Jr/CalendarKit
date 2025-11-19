@@ -177,7 +177,13 @@ public final class DayColumnCell: UIView, DaySelectorItemProtocol {
             backgroundColor = style.capsuleBackgroundColor
             dayLabel.textColor = style.dayNameSelectedColor
             dayLabel.font = UIFont.boldSystemFont(ofSize: style.dayNameFont.pointSize)
-            dateLabel.textColor = style.dateNumberSelectedColor
+
+            // Use current day color if set and it's today, otherwise use selected color
+            if isToday, let currentDayColor = style.dateNumberCurrentDayColor {
+                dateLabel.textColor = currentDayColor
+            } else {
+                dateLabel.textColor = style.dateNumberSelectedColor
+            }
         } else {
             dateLabel.font = style.font
             dayBackgroundView.backgroundColor = style.dateCircleBackgroundUnselectedColor
@@ -185,7 +191,13 @@ public final class DayColumnCell: UIView, DaySelectorItemProtocol {
             backgroundColor = .clear
             dayLabel.textColor = style.dayNameUnselectedColor
             dayLabel.font = style.dayNameFont
-            dateLabel.textColor = style.dateNumberUnselectedColor
+
+            // Use current day color if set and it's today, otherwise use unselected color
+            if isToday, let currentDayColor = style.dateNumberCurrentDayColor {
+                dateLabel.textColor = currentDayColor
+            } else {
+                dateLabel.textColor = style.dateNumberUnselectedColor
+            }
         }
     }
 

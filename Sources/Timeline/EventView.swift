@@ -42,7 +42,7 @@ open class EventView: UIView {
         }
     }
     
-    public func updateWithDescriptor(event: EventDescriptor, borderWidth: CGFloat = 0, borderColor: UIColor = .white) {
+    public func updateWithDescriptor(event: EventDescriptor, borderWidth: CGFloat = 0, borderColor: UIColor = .white, maximumNumberOfLines: Int = 0) {
         if let attributedText = event.attributedText {
             textView.attributedText = attributedText
             textView.setNeedsLayout()
@@ -54,6 +54,14 @@ open class EventView: UIView {
         if let lineBreakMode = event.lineBreakMode {
             textView.textContainer.lineBreakMode = lineBreakMode
         }
+
+        // Set maximum number of lines
+        if maximumNumberOfLines > 0 {
+            textView.textContainer.maximumNumberOfLines = maximumNumberOfLines
+        } else {
+            textView.textContainer.maximumNumberOfLines = 0  // 0 means unlimited
+        }
+
         descriptor = event
         backgroundColor = .clear
         layer.backgroundColor = event.backgroundColor.cgColor

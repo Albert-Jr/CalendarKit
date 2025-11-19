@@ -101,6 +101,7 @@ final class CustomCalendarExampleController: DayViewController {
         // 1 - 31 label colors
         style.header.daySelector.dateNumberSelectedColor = .white // Selected date number color
         style.header.daySelector.dateNumberUnselectedColor = .black // Unselected date number color
+        style.header.daySelector.dateNumberCurrentDayColor = .red // Current day color (e.g., Nov 19 if today). If nil, uses selected/unselected colors
 
         // Background color for the circle around 1 - 31 label
         style.header.daySelector.dateCircleBackgroundSelectedColor = .orange // Selected state
@@ -136,6 +137,7 @@ final class CustomCalendarExampleController: DayViewController {
         style.timeline.eventsWillOverlap = true  // Enable overlapping for events with same start time
         style.timeline.eventGap = 0  // Gap between events (0 for full overlap)
         style.timeline.overlappingEventFixedWidth = 50  // Fixed width for first N-1 overlapping events (last event takes remaining space)
+        style.timeline.eventMaximumNumberOfLines = 1  // Maximum number of lines for event text (1 = single line, 0 = unlimited)
 
         // Event borders
         style.timeline.eventBorderWidth = 2   // White border for events

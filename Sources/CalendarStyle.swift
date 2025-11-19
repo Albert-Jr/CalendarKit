@@ -75,6 +75,7 @@ public struct DaySelectorStyle {
     // Date number colors (1-31)
     public var dateNumberSelectedColor = UIColor.black
     public var dateNumberUnselectedColor = SystemColors.label
+    public var dateNumberCurrentDayColor: UIColor? = nil  // Text color for current day (e.g., Nov 19). If nil, uses selected/unselected colors
 
     // Circle background color for date numbers
     public var dateCircleBackgroundSelectedColor = UIColor.white
@@ -124,6 +125,7 @@ public struct TimelineStyle {
     public var eventBorderWidth: CGFloat = 0  // Border width for events
     public var eventBorderColor: UIColor = .white  // Border color for events
     public var overlappingEventFixedWidth: Double = 50  // Fixed width for first N-1 overlapping events
+    public var eventMaximumNumberOfLines: Int = 0  // Maximum number of lines for event text (0 = unlimited)
     public init() {}
 }
 
