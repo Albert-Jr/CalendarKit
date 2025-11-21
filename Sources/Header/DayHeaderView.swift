@@ -136,8 +136,22 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
         let buttonHeight: CGFloat = 32
         let topSpacing = style.topSpacing
         let buttonY = topSpacing + daySymbolsViewHeight + (pagingScrollViewHeight - buttonHeight) / 2
-        let leadingSpacing: CGFloat = style.navigationButtonLeadingSpacing
-        let trailingSpacing: CGFloat = style.navigationButtonTrailingSpacing
+
+        // Calculate minimum required width for 7 day cells (40pt each = 280pt) plus buttons
+        let minRequiredWidth: CGFloat = 280 + (buttonWidth * 2)
+        let availableWidth = bounds.width
+
+        // Use configured spacing only if device is large enough, otherwise use 0
+        let leadingSpacing: CGFloat
+        let trailingSpacing: CGFloat
+
+        if availableWidth >= minRequiredWidth + style.navigationButtonLeadingSpacing + style.navigationButtonTrailingSpacing {
+            leadingSpacing = style.navigationButtonLeadingSpacing
+            trailingSpacing = style.navigationButtonTrailingSpacing
+        } else {
+            leadingSpacing = 0
+            trailingSpacing = 0
+        }
 
         // Previous week button on the left with 32 leading spacing
         previousWeekButton.frame = CGRect(x: leadingSpacing, y: buttonY, width: buttonWidth, height: buttonHeight)
