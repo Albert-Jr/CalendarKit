@@ -88,6 +88,7 @@ final class CustomCalendarExampleController: DayViewController {
         style.timeline.backgroundColor = .white  // Timeline background
         style.cornerRadius = 24  // Corner radius for the whole calendar
         style.header.topSpacing = 16  // Top spacing for header
+        style.header.separatorHidden = true  // Hide the separator line below the header
 
         // Fonts
         style.header.daySelector.dayNameFont = UIFont.systemFont(ofSize: 12, weight: .regular) // Mon-Sun font
@@ -144,6 +145,9 @@ final class CustomCalendarExampleController: DayViewController {
         style.timeline.eventBorderColor = .purple
         style.timeline.allDayStyle.eventBorderWidth = 2  // White border for all-day events
         style.timeline.allDayStyle.eventBorderColor = .white
+        
+        style.timeline.minimumEventHeight = 80 // Minimum height in points
+        style.timeline.minimumEventHeightThreshold = 3600 // 1 hour in seconds (default)
 
         dayView.updateStyle(style)
 

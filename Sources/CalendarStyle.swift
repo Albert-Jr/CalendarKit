@@ -26,6 +26,7 @@ public struct DayHeaderStyle {
     public var swipeLabel = SwipeLabelStyle()
     public var backgroundColor = SystemColors.systemBackground
     public var separatorColor = SystemColors.systemSeparator
+    public var separatorHidden: Bool = false  // Set to true to hide the separator line below the header
     public var topSpacing: CGFloat = 0
 
     // Navigation button icons
@@ -126,6 +127,8 @@ public struct TimelineStyle {
     public var eventBorderColor: UIColor = .white  // Border color for events
     public var overlappingEventFixedWidth: Double = 50  // Fixed width for first N-1 overlapping events
     public var eventMaximumNumberOfLines: Int = 0  // Maximum number of lines for event text (0 = unlimited)
+    public var minimumEventHeight: Double = 0  // Minimum height for events shorter than minimumEventHeightThreshold (0 = no minimum)
+    public var minimumEventHeightThreshold: TimeInterval = 3600  // Duration threshold in seconds (default: 1 hour). Events shorter than this will use minimumEventHeight
     public init() {}
 }
 

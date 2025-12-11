@@ -488,6 +488,14 @@ public final class TimelineView: UIView {
                 let startY = dateToY(event.descriptor.dateInterval.start)
                 let endY = dateToY(event.descriptor.dateInterval.end)
 
+                // Calculate height with minimum height constraint for short events
+                let calculatedHeight = endY - startY
+                let eventDuration = event.descriptor.dateInterval.duration
+                let shouldApplyMinimumHeight = style.minimumEventHeight > 0 && eventDuration < style.minimumEventHeightThreshold
+                // Add eventGap to minimumEventHeight since it will be subtracted later in layoutEvents()
+                let minimumHeight = style.minimumEventHeight + style.eventGap
+                let eventHeight = shouldApplyMinimumHeight ? max(calculatedHeight, minimumHeight) : calculatedHeight
+
                 // If eventsWillOverlap and there are multiple events, use fixed width for first N-1 events
                 if style.eventsWillOverlap && totalCount > 1 {
                     let fixedWidth = style.overlappingEventFixedWidth
@@ -501,17 +509,17 @@ public final class TimelineView: UIView {
                         let totalCountDouble = Double(totalCount)
                         let x = style.leadingInset + floatIndex / totalCountDouble * calendarWidth
                         let equalWidth = calendarWidth / totalCountDouble
-                        event.frame = CGRect(x: x, y: startY, width: equalWidth, height: endY - startY)
+                        event.frame = CGRect(x: x, y: startY, width: equalWidth, height: eventHeight)
                     } else {
                         if index < totalCount - 1 {
                             // First N-1 events have fixed width
                             let x = style.leadingInset + Double(index) * fixedWidth
-                            event.frame = CGRect(x: x, y: startY, width: fixedWidth, height: endY - startY)
+                            event.frame = CGRect(x: x, y: startY, width: fixedWidth, height: eventHeight)
                         } else {
                             // Last event takes the remaining space
                             let x = style.leadingInset + Double(index) * fixedWidth
                             let remainingWidth = calendarWidth - Double(index) * fixedWidth
-                            event.frame = CGRect(x: x, y: startY, width: remainingWidth, height: endY - startY)
+                            event.frame = CGRect(x: x, y: startY, width: remainingWidth, height: eventHeight)
                         }
                     }
                 } else {
@@ -520,7 +528,7 @@ public final class TimelineView: UIView {
                     let totalCountDouble = Double(totalCount)
                     let x = style.leadingInset + floatIndex / totalCountDouble * calendarWidth
                     let equalWidth = calendarWidth / totalCountDouble
-                    event.frame = CGRect(x: x, y: startY, width: equalWidth, height: endY - startY)
+                    event.frame = CGRect(x: x, y: startY, width: equalWidth, height: eventHeight)
                 }
             }
         }

@@ -121,6 +121,7 @@ public final class DayHeaderView: UIView, DaySelectorDelegate, DayViewStateUpdat
         (pagingViewController.viewControllers as? [DaySelectorController])?.forEach{$0.updateStyle(newStyle.daySelector)}
         backgroundColor = style.backgroundColor
         separator.backgroundColor = style.separatorColor
+        separator.isHidden = style.separatorHidden
 
         // Update navigation button icons and color
         previousWeekButton.setImage(style.previousWeekIcon, for: .normal)
