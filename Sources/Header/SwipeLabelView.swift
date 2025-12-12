@@ -74,6 +74,10 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
             label.textColor = style.textColor
             label.font = style.font
         }
+        // Update the label text with the new date format
+        if let currentState = state {
+            labels.first?.text = formattedDate(date: currentState.selectedDate)
+        }
         setNeedsLayout()
     }
 

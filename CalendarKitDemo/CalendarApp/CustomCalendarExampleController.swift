@@ -115,6 +115,7 @@ final class CustomCalendarExampleController: DayViewController {
         style.header.swipeLabel.textColor = .purple
         style.header.swipeLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         style.header.swipeLabel.leadingSpacing = 0  // Leading spacing for swipe label
+        style.header.swipeLabel.dateFormat = "EEE d MMM"
 
         // Navigation button icons (chevron left/right)
         if #available(iOS 13.0, *) {
