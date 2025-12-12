@@ -131,6 +131,7 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
         formatter.timeZone = timezone
         formatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
 
-        return formatter.string(from: date).uppercased()
+        let formattedString = formatter.string(from: date)
+        return style.uppercased ? formattedString.uppercased() : formattedString
     }
 }

@@ -101,6 +101,7 @@ public struct SwipeLabelStyle {
     public var font = UIFont.systemFont(ofSize: 15)
     public var leadingSpacing: CGFloat = 0
     public var dateFormat: String = "EEE, MMM d"  // Date format (e.g., "EEE, MMM d" -> "FRI, DEC 12" or "EEE d MMM" -> "FRI 12 DEC")
+    public var uppercased: Bool = true  // Whether to display the date in uppercase (true = "FRI 12 DEC", false = "Fri 12 Dec")
     public init() {}
 }
 
