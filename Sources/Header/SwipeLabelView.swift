@@ -122,15 +122,8 @@ public final class SwipeLabelView: UIView, DayViewStateUpdating {
 
     private func formattedDate(date: Date) -> String {
         let timezone = calendar.timeZone
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .medium
-//        formatter.timeStyle = .none
-//        formatter.timeZone = timezone
-//        formatter.locale = Locale.init(identifier: Locale.preferredLanguages[0])
-//        return formatter.string(from: date)
-        
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEE, MMM d"     // Tue, Mar 2
+        formatter.dateFormat = style.dateFormat
         formatter.timeZone = timezone
         formatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
 
